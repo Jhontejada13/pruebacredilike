@@ -70,6 +70,7 @@ import { MoviesComponent } from './movies/movies.component';
     SidebarLogoComponent,
     SidebarUserPanelComponent,
     SidebarMenuComponent,
+    //movies
     MoviesComponent
   ],
   imports: [
