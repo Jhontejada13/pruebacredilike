@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace PeliFlix.Movies.Dto
 {
+    [AutoMapper(typeof(Movies))]
     public class MovieDto : EntityDto
     {
     }
