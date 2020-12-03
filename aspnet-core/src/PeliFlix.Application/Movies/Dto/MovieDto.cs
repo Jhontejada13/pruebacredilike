@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PeliFlix.Movies.Dto
 {
-    [AutoMap(typeof(Movie))]
+    [AutoMapFrom(typeof(Movie))]
     public class MovieDto : EntityDto
     {
         public string Title { get; set; }
