@@ -44,53 +44,30 @@ namespace PeliFlix.Movies
             return MapToEntityDto(movie);            
         }
 
-        //public override async Task<MovieDto> CreateAsync(CreateMovieDto input)
-        //{
-        //    var movie = _MovieRepository.FirstOrDefault(m => m.Title == input.Title);
-        //    if (movie != null)
-        //    {
-        //        throw new UserFriendlyException("There is already a movei with given title");
-        //    }
+        public override async Task<MovieDto> UpdateAsync(MovieDto input)
+        {
+            var movie = await _MovieRepository.FirstOrDefaultAsync(m => m.Id == input.Id);
 
-        //    movie = new Movie() { Title = input.Title, Director = input.Director, Synopsis = input.Synopsis, year = input.year };
-        //    _MovieRepository.Insert(movie);
+            if (movie == null)
+            {
+                throw new UserFriendlyException("This Movie doesn't exist");
+            }
 
-        //    return MapToEntityDto(movie);
-        //}
+            movie.Director = input.Director;
+            movie.year = input.year;
+            movie.Synopsis = input.Synopsis;
+            movie.Title = input.Title;
+            movie.GenderId = input.GenderId;
+            await _MovieRepository.UpdateAsync(movie);
+
+            return await GetAsync(input);
+        }
 
         public override async Task DeleteAsync(EntityDto<int> input)
         {
             var movie = await _MovieRepository.GetAsync(input.Id);
             await _MovieRepository.DeleteAsync(movie);
         }
-
-        //public async Task<PagedResultDto<MovieDto>> GetAllAsync()
-        //{
-        //    var movies = await _MovieRepository.GetAllListAsync();
-        //    return new PagedResultDto<MovieDto>(movies.Count, ObjectMapper.Map<List<MovieDto>>(movies));
-        //}
-
-
-
-        //public async Task<ListResultDto<MovieDto>> GetMovies()
-        //{
-        //    var movies = await _MovieRepository.GetAllListAsync();
-        //    return new ListResultDto<MovieDto>(ObjectMapper.Map<List<MovieDto>>(movies));
-        //}
-
-
-        //public async Task<List<Movie>> GetAll()
-        //{
-        //    var movies = await _MovieRepository
-        //        .GetAll().OrderBy(m => m.Title)
-        //        .ToListAsync();
-
-        //    return movies;
-        //}
-
-        //public async Task<Movie> GetOneMovie(Movie movie)
-        //{
-        //    return await _MovieRepository.FirstOrDefaultAsync(m => m.Id == movie.Id);
-        //}
+      
     }
 }
