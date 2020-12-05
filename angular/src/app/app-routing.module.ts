@@ -23,7 +23,7 @@ import { ChangePasswordComponent } from './users/change-password/change-password
                     { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },
                     { path: 'about', component: AboutComponent },
                     { path: 'update-password', component: ChangePasswordComponent },
-                    { path: 'movies', component: MoviesComponent }
+                    { path: 'movies', component: MoviesComponent, canActivate: [AppRouteGuard]}
                 ]
             }
         ])
