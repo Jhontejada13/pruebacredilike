@@ -11,13 +11,13 @@ import { result } from 'lodash-es';
 
 class PagedMoviesRequestDto extends PagedRequestDto {
   keyword: string;
-  isActive: boolean | null;
+  //isActive: boolean | null;
 }
 
 @Component({
-  selector: 'app-movies',
+  //selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.css'],
+  // styleUrls: ['./movies.component.css'],
   animations: [appModuleAnimation]
 })
 export class MoviesComponent extends PagedListingComponentBase<MovieDto>{
@@ -26,7 +26,7 @@ export class MoviesComponent extends PagedListingComponentBase<MovieDto>{
   // }
   movies: MovieDto[] = [];
   keyword = '';
-  isActive: boolean | null;
+  //isActive: boolean | null;
   advancedFiltersVisible = false;
 
   constructor(
@@ -38,6 +38,10 @@ export class MoviesComponent extends PagedListingComponentBase<MovieDto>{
   }
 
   ngOnInit(): void {
+  }
+
+  createMovie(): void{
+    
   }
 
   clearFilters(): void{
@@ -52,7 +56,7 @@ export class MoviesComponent extends PagedListingComponentBase<MovieDto>{
     finishedCallback: Function
   ): void {
     request.keyword = this.keyword;
-    request.isActive =  this.isActive;
+    //request.isActive =  this.isActive;
 
     this._moviesService
     .getAll(
@@ -67,7 +71,7 @@ export class MoviesComponent extends PagedListingComponentBase<MovieDto>{
     )
     .subscribe((result: MovieDtoPagedResultDto) => {
       this.movies = result.items,
-      this.showPaging(result,pageNumber);
+      this.showPaging(result, pageNumber);
     });
   }
 
@@ -84,6 +88,13 @@ export class MoviesComponent extends PagedListingComponentBase<MovieDto>{
         }
       }
     );
+  }
+
+  private showCreateOrEditMovie(id?: number){
+    let createOrEditeMovieDialog: BsModalRef;
+    if(!id){
+      
+    }
   }
 
 }
