@@ -43,6 +43,10 @@ export class MoviesComponent extends PagedListingComponentBase<MovieDto>{
     console.log("Estoy funcionando")
   }
 
+  editMovie(movie: MovieDto): void {
+    console.log("También funciono")
+  }
+
   clearFilters(): void {
     this.keyword = '';
     this.getDataPage(1);

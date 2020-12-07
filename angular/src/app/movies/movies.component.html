@@ -57,7 +57,17 @@
                     </td>
                     <td> {{ movie.year }} </td>
                     <td> {{ movie.director }} </td>
-                    <td> {{ movie.gender }} </td>
+                    <td> {{ movie.genderId }} </td>
+                    <td>
+                      <button type="button" class="btn btn-sm bg-secondary" (click)="editMovie(movie)">
+                        <i class="fas fa-pencil-alt"></i>
+                        {{ "Edit" | localize }}
+                      </button>
+                      <button type="button" class="btn btn-sm bg-danger mx-2" (click)="delete(movie)">
+                        <i class="fas fa-trash"></i>
+                        {{ "Delete" | localize }}
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
