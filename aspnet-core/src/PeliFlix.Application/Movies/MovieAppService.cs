@@ -34,7 +34,7 @@ namespace PeliFlix.Movies
             var movie = await _MovieRepository.FirstOrDefaultAsync(m => m.Title == input.Title);
             if (movie != null)
             {
-                throw new UserFriendlyException("There is already a movei with given title");
+                throw new UserFriendlyException("There is already a movie with given title");
             }
 
             movie = new Movie() { Title = input.Title, Director = input.Director, Synopsis = input.Synopsis, year = input.year, 

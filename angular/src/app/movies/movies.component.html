@@ -1,12 +1,70 @@
 <div [@routerTransition]>
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-6">
-            <h1>{{ "Movies" | localize }}</h1>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <h1>{{ "Movies" | localize }}</h1>
+        </div>
+        <div class="col-6 text-right">
+          <a href="javascript:;" class="btn bg-blue" (click)="createMovie()">
+            <i class="fa fa-plus-square"></i>
+            {{ "Create" | localize }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="content px-2">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-header">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button type="button" class="btn bg-blue" (click)="getDataPage(1)">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+            <input type="text" class="form-control" name="keyword" [placeholder]="'SearchWithThreeDot' | localize"
+              [(ngModel)]="keyword" (keyup.enter)="getDataPage(1)" />
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap" [busy]="isTableLoading">
+                <thead class="bg-light">
+                  <tr>
+                    <th> {{ "Title" | localize }} </th>
+                    <th> {{ "Synopsis" | localize }} </th>
+                    <th> {{ "Year" | localize }} </th>
+                    <th> {{ "Director" | localize }} </th>
+                    <th> {{ "Gender" | localize }} </th>
+                    <th style="width: 310px;">{{ "Actions" | localize }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="
+                  let movie of movies
+                    | paginate
+                      : {
+                          id: 'server',
+                          itemsPerPage: pageSize,
+                          currentPage: pageNumber,
+                          totalItems: totalItems
+                        }
+                ">
+                    <td> {{ movie.title }} </td>
+                    <td>
+                      <textarea class="md-textarea form-control text-left" rows="6">
+                        {{ movie.synopsis }}
+                      </textarea>
+                    </td>
+                    <td> {{ movie.year }} </td>
+                    <td> {{ movie.director }} </td>
+                    <td> {{ movie.gender }} </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 </div>
-

@@ -15,7 +15,6 @@ namespace PeliFlix.Movies.Dto
     {
 
         [Required]
-        //[StringLength(maximumLength:300)]
         public string Title { get; set; }
 
         [Required]
@@ -27,7 +26,6 @@ namespace PeliFlix.Movies.Dto
         [Required]
         public string Director { get; set; }
 
-        //public string[] GenderNames { get; set; }
         [Required]
         public int GenderId { get; set; }
 
