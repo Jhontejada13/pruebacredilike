@@ -39,7 +39,7 @@ import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
 //Movies
-import { MoviesComponent } from './movies/movies.component';
+import { MoviesComponent } from '@app/movies/movies.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +100,7 @@ import { MoviesComponent } from './movies/movies.component';
     CreateUserDialogComponent,
     EditUserDialogComponent,
     ResetPasswordDialogComponent,
+
   ],
 })
 export class AppModule {}
