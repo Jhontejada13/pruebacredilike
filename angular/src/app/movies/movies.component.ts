@@ -11,6 +11,8 @@ import {
   MovieDtoPagedResultDto,
   MovieServiceProxy
 } from '@shared/service-proxies/service-proxies';
+import { CreateMovieDialogComponent } from './create-movie/create-movie-dialog.component';
+import { EditMovieDialogComponent } from './edit-movie/edit-movie-dialog.component';
 
 class PagedMoviesRequestDto extends PagedRequestDto {
   keyword: string;
@@ -41,10 +43,16 @@ export class MoviesComponent extends PagedListingComponentBase<MovieDto>{
 
   createMovie(): void {
     console.log("Estoy funcionando")
+    this.showCreateOrEditMovieDialog()
   }
 
   editMovie(movie: MovieDto): void {
-    console.log("También funciono")
+    console.log("También funciono", movie.title)
+    this.showCreateOrEditMovieDialog(movie.id)
+  }
+
+  seeTrailer(movie: MovieDto): void {
+    console.log("También funciona esta vuelta!", movie.title)
   }
 
   clearFilters(): void {
@@ -91,11 +99,30 @@ export class MoviesComponent extends PagedListingComponentBase<MovieDto>{
     );
   }
 
-  private showCreateOrEditMovie(id?: number) {
+  private showCreateOrEditMovieDialog(id?: number) {
     let createOrEditeMovieDialog: BsModalRef;
     if (!id) {
-
+        createOrEditeMovieDialog = this._modalService.show(
+          CreateMovieDialogComponent,
+          {
+            class: 'modal-lg',
+          }
+        );
+    }else{
+      createOrEditeMovieDialog = this._modalService.show(
+        EditMovieDialogComponent,
+        {
+          class: 'modal-lg',
+          initialState: {
+            id: id,
+          }
+        }
+      );
     }
+
+    createOrEditeMovieDialog.content.onSave.subscribe(() => {
+      this.refresh();
+    })
   }
 
 }
