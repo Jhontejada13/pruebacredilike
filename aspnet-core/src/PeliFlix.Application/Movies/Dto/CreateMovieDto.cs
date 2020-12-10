@@ -29,12 +29,14 @@ namespace PeliFlix.Movies.Dto
         [Required]
         public int GenderId { get; set; }
 
+        public string[] GendersName { get; set; }
+
         public void Normalize()
         {
-            //if (GenderNames == null)
-            //{
-            //    GenderNames = new string[0];
-            //}
+            if (GendersName == null)
+            {
+                GendersName = new string[0];
+            }
         }
     }
 }

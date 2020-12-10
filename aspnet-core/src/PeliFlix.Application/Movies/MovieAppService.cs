@@ -8,6 +8,7 @@ using Abp.UI;
 using Microsoft.EntityFrameworkCore;
 using PeliFlix.Authorization;
 using PeliFlix.Entities;
+using PeliFlix.Genders.Dto;
 using PeliFlix.Movies.Dto;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,13 @@ namespace PeliFlix.Movies
     public class MovieAppService : AsyncCrudAppService<Movie, MovieDto, int, PagedMovieRequestResultDto, CreateMovieDto, MovieDto>, IMovieAppService
     {
         private readonly IRepository<Movie, int> _MovieRepository;
+        private readonly IRepository<Gender> _GenderRepository;
 
-        public MovieAppService(IRepository<Movie> movieRepository)
+        public MovieAppService(IRepository<Movie> movieRepository, IRepository<Gender> genderRepository)
              : base(movieRepository)
         {
             _MovieRepository = movieRepository;
+            _GenderRepository = genderRepository;
         }
 
         public override async Task<MovieDto> CreateAsync(CreateMovieDto input)
@@ -67,6 +70,12 @@ namespace PeliFlix.Movies
         {
             var movie = await _MovieRepository.GetAsync(input.Id);
             await _MovieRepository.DeleteAsync(movie);
+        }
+
+        public async Task<ListResultDto<GenderDto>> GetGenders()
+        {
+            var genders = await _GenderRepository.GetAllListAsync();
+            return new ListResultDto<GenderDto>(ObjectMapper.Map<List<GenderDto>>(genders));
         }
       
     }
