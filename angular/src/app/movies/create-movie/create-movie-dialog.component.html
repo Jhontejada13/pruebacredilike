@@ -1,1 +1,53 @@
-<h1>Para probar</h1>
+<form class="form-horizontal" (ngSubmit)="save()">
+    <h3 class="modal-title text-center" id="exampleModalLabel">Create Movie</h3>
+    <div class="modal-body">
+        <div class="form-group row required">
+            <label for="title" class="col-md-3 col-form-label">
+                Title
+            </label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="title" id="title" required>
+            </div>
+        </div>
+        <div class="btn-group" ngbDropdown >
+            <button type="button" class="btn btn-primary">Genders</button>
+            <button type="button" class="btn btn-primary dropdown-toggle px-3" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="true" id="dropDownMenu">
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropDownMenu">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </div>
+        <div class="form-group row required">
+            <label for="synopsis" class="col-md-3 col-form-label">
+                Synopsis
+            </label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="synopsis" id="synopsis" required>
+            </div>
+        </div>
+        <div class="form-group row required">
+            <label for="year" class="col-md-3 col-form-label">
+                Year
+            </label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="year" id="year" required>
+            </div>
+        </div>
+        <div class="form-group row required">
+            <label for="year" class="col-md-3 col-form-label">
+                Director
+            </label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="director" id="director" required>
+            </div>
+        </div>
+        <div class="modal-footer d-flex rounded justify-content-center">
+            <button class="btn btn-success">Save</button>
+            <button class="btn btn-default">Cancel</button>
+        </div>
+    </div>
+</form>
