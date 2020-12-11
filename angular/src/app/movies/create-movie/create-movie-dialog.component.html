@@ -1,24 +1,98 @@
-<form class="form-horizontal" (ngSubmit)="save()">
-    <h3 class="modal-title text-center" id="exampleModalLabel">Create Movie</h3>
+<form class="form-horizontal" autocomplete="off" #createMovieModal="ngForm" (ngSubmit)="save()">
+    <abp-modal-header [title]="'CreateNewMovie' | localize" (onCloseClick)="bsModalRef.hide()">
+    </abp-modal-header>
+    <div class="modal-body">
+        <tabset>
+            <tab [heading]="'MovieDetails' | localize" class="pt-3 px-2">
+                <div class="form-group row required">
+                    <label for="title" class="col-md-3 col-form-label">
+                        {{ "Title" | localize }}
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="title" id="title" required
+                        [(ngModel)]="movie.title" #titleModel="ngModel" #titleEl>
+                    </div>
+                </div>
+                <div class="form-group row required">
+                    <label for="gender" class="col-md-3 col-form-label">
+                        {{ "Gender" | localize }}
+                    </label>
+                    <div class="col-md-9">
+                        <select name="gendersId" class="custom-select" 
+                        [(ngModel)]="genderSelected" required>
+                        <option [ngValue]="undefined"> {{ ("Select") }} </option>
+                        <option *ngFor="let gender of genders" [ngValue]="gender">
+                            {{ gender.name }}
+                        </option>
+                    </select>
+                    </div>
+                </div>
+                <div class="form-group row required">
+                    <label for="synopsis" class="col-md-3 col-form-label">
+                        {{ "Synopsis" | localize }}
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="synopsis" id="synopsis" required
+                        [(ngModel)]="movie.synopsis" #titleModel="ngModel" #titleEl>
+                    </div>
+                </div>
+                <div class="form-group row required">
+                    <label for="year" class="col-md-3 col-form-label">
+                        {{ "Year" | localize }}
+                    </label>
+                    <div class="col-md-9">
+                        <input type="number" class="form-control" name="year" id="year" required
+                        [(ngModel)]="movie.year" #titleModel="ngModel" #titleEl>
+                    </div>
+                </div>
+                <div class="form-group row required">
+                    <label for="director" class="col-md-3 col-form-label">
+                        {{ "Director" | localize }}
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="director" id="director" required
+                        [(ngModel)]="movie.director" #titleModel="ngModel" #titleEl>
+                    </div>
+                </div>
+
+            </tab>
+        </tabset>
+    </div>
+    <abp-modal-footer [cancelDisabled]="saving" [saveDisabled]="!createMovieModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"></abp-modal-footer>
+</form>
+
+<!--form class="form-horizontal" (ngSubmit)="save()">
+    <div class="modal-header">
+        <h3 class="modal-title text-center" id="exampleModalLabel">Create Movie</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" (click)="bsModalRef.hide()">&times;</span>
+        </button>
+    </div>
+
     <div class="modal-body">
         <div class="form-group row required">
             <label for="title" class="col-md-3 col-form-label">
                 Title
             </label>
             <div class="col-md-9">
-                <input type="text" class="form-control" name="title" id="title" required>
+                <input type="text" class="form-control" name="title" id="title"  
+                required>
             </div>
         </div>
-        <div class="btn-group" ngbDropdown >
-            <button type="button" class="btn btn-primary">Genders</button>
-            <button type="button" class="btn btn-primary dropdown-toggle px-3" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="true" id="dropDownMenu">
-                <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropDownMenu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+        <div class="form-group row required">
+            <label for="title" class="col-md-3 col-form-label">
+                Gender
+            </label>
+            <div class="col-md-9">
+                <select name="genderId" class="custom-select" [(ngModel)]="genderSelected" required>
+                    <option [ngValue]="undefined">
+                        {{ "Select" }}
+                    </option>
+                    <option *ngFor="let gender of genders" [ngValue]="gender">
+                        {{ gender.name }}
+                    </option>
+                </select>
             </div>
         </div>
         <div class="form-group row required">
@@ -26,7 +100,8 @@
                 Synopsis
             </label>
             <div class="col-md-9">
-                <input type="text" class="form-control" name="synopsis" id="synopsis" required>
+                <input type="text" class="form-control" name="synopsis" id="synopsis" 
+                required>
             </div>
         </div>
         <div class="form-group row required">
@@ -34,7 +109,8 @@
                 Year
             </label>
             <div class="col-md-9">
-                <input type="text" class="form-control" name="year" id="year" required>
+                <input type="text" class="form-control" name="year" id="year" 
+                required>
             </div>
         </div>
         <div class="form-group row required">
@@ -42,12 +118,13 @@
                 Director
             </label>
             <div class="col-md-9">
-                <input type="text" class="form-control" name="director" id="director" required>
+                <input type="text" class="form-control" name="director" id="director"  
+                required>
             </div>
         </div>
-        <div class="modal-footer d-flex rounded justify-content-center">
-            <button class="btn btn-success">Save</button>
-            <button class="btn btn-default">Cancel</button>
+        <div class="modal-footer d-flex rounded justify-content-center" >
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
         </div>
     </div>
-</form>
+</form-->

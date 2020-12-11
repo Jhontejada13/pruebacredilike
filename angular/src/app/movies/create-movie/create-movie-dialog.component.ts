@@ -3,7 +3,7 @@ import {
   Injector,
   OnInit,
   EventEmitter,
-  Output
+  Output,
 } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -14,27 +14,26 @@ import {
   CreateMovieDto,
   GenderDto
 } from '@shared/service-proxies/service-proxies';
-import { AbpValidationError } from '@shared/components/validation/abp-validation.api';
+
 
 @Component({
-  templateUrl: './create-movie-dialog.component.html'
+  templateUrl: './create-movie-dialog.component.html',
 })
 export class CreateMovieDialogComponent extends AppComponentBase
   implements OnInit {
   saving = false;
   movie = new CreateMovieDto();
   genders: GenderDto[] = [];
+  genderSelected: GenderDto | null;
   checkedGendersMap: { [key: string]: boolean } = {};
   defaultGendersChekedStatus = false;
-  //checkedRolesMap: { [key: string]: boolean } = {};
-  //defaultRoleCheckedStatus = false;
 
   @Output() onSave = new EventEmitter<any>();
 
   constructor(
     injector: Injector,
     public _movieService: MovieServiceProxy,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
   ) {
     super(injector);
   }
@@ -42,7 +41,8 @@ export class CreateMovieDialogComponent extends AppComponentBase
   ngOnInit(): void {    
     this._movieService.getGenders().subscribe((result) => {
       this.genders = result.items;
-    })
+      console.log(this.genders)
+    });
   }
 
   setInitialGenderStatus(): void {
@@ -75,7 +75,9 @@ export class CreateMovieDialogComponent extends AppComponentBase
     this.saving = true;
 
     this.movie.gendersName = this.getCheckedGenders();
-
+    
+    this.movie.genderId = this.genderSelected.id;
+    console.log(this.genderSelected.id)
     this._movieService
       .create(this.movie)
       .pipe(
@@ -88,6 +90,7 @@ export class CreateMovieDialogComponent extends AppComponentBase
         this.bsModalRef.hide();
         this.onSave.emit();
       });
+      console.log(this.movie);
   }
 }
 
