@@ -11,7 +11,8 @@ import * as ApiServiceProxies from './service-proxies';
         ApiServiceProxies.TenantServiceProxy,
         ApiServiceProxies.UserServiceProxy,
         ApiServiceProxies.MovieServiceProxy,//Servicio creado para movies
-        ApiServiceProxies.GenderServiceProxy, //Servicio creado para géneros
+        ApiServiceProxies.GenderServiceProxy, //Servicio creado para géneros 
+        ApiServiceProxies.MovieSeenServiceProxy, //Servicio creado para MovieSeen       
         ApiServiceProxies.TokenAuthServiceProxy,
         ApiServiceProxies.AccountServiceProxy,
         ApiServiceProxies.ConfigurationServiceProxy,
