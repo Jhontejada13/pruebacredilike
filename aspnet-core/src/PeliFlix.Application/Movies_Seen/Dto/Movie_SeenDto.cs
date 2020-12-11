@@ -18,5 +18,13 @@ namespace PeliFlix.Movies_Seen.Dto
 
         public int MovieId { get; set; }
         public int UserId { get; set; }
+
+        public int MovieYear { get; set; }
+
+        public string TitleMovie { get; set; }
+        public string SynopsisMovie { get; set; }
+        public string DirectorMovie { get; set; }
+        public string GenderMovie { get; set; }
+
     }
 }
