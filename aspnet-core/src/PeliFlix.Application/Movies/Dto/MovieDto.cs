@@ -20,5 +20,7 @@ namespace PeliFlix.Movies.Dto
         public int GenderId { get; set; }
         //public string MovieName { get; set; }
 
+        public string[] GendersName { get; set; }
+
     }
 }

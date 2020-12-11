@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace PeliFlix.Movies.Dto
 {
     [AutoMapTo(typeof(Movie))]
-    public class CreateMovieDto : IShouldNormalize
+    public class CreateMovieDto : IShouldNormalize  
     {
 
         [Required]
@@ -30,6 +30,8 @@ namespace PeliFlix.Movies.Dto
         public int GenderId { get; set; }
 
         public string[] GendersName { get; set; }
+
+        public bool isView { get; set; }
 
         public void Normalize()
         {
