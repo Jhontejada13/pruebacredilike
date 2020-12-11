@@ -28,6 +28,10 @@ import { CreateUserDialogComponent } from '@app/users/create-user/create-user-di
 import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
+//Movies
+import { MoviesComponent } from '@app/movies/movies.component';
+import { CreateMovieDialogComponent } from '@app/movies/create-movie/create-movie-dialog.component';
+import { EditMovieDialogComponent } from '@app/movies/edit-movie/edit-movie-dialog.component';
 // layout
 import { HeaderComponent } from './layout/header.component';
 import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component';
@@ -38,8 +42,7 @@ import { SidebarComponent } from './layout/sidebar.component';
 import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
-//Movies
-import { MoviesComponent } from '@app/movies/movies.component';
+
 
 @NgModule({
   declarations: [
@@ -60,6 +63,10 @@ import { MoviesComponent } from '@app/movies/movies.component';
     EditUserDialogComponent,
     ChangePasswordComponent,
     ResetPasswordDialogComponent,
+    //movies
+    MoviesComponent,
+    CreateMovieDialogComponent,
+    EditMovieDialogComponent,
     // layout
     HeaderComponent,
     HeaderLeftNavbarComponent,
@@ -70,8 +77,7 @@ import { MoviesComponent } from '@app/movies/movies.component';
     SidebarLogoComponent,
     SidebarUserPanelComponent,
     SidebarMenuComponent,
-    //movies
-    MoviesComponent
+    
   ],
   imports: [
     CommonModule,
@@ -100,7 +106,9 @@ import { MoviesComponent } from '@app/movies/movies.component';
     CreateUserDialogComponent,
     EditUserDialogComponent,
     ResetPasswordDialogComponent,
-
+    // movies
+    CreateMovieDialogComponent,
+    EditMovieDialogComponent
   ],
 })
 export class AppModule {}

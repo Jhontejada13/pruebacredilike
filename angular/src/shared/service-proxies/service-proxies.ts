@@ -2860,6 +2860,7 @@ export class CreateMovieDto implements ICreateMovieDto {
     director: string;
     genderId: number;
     gendersName: string[] | undefined;
+    isView: boolean;
 
     constructor(data?: ICreateMovieDto) {
         if (data) {
@@ -2882,6 +2883,7 @@ export class CreateMovieDto implements ICreateMovieDto {
                 for (let item of _data["gendersName"])
                     this.gendersName.push(item);
             }
+            this.isView = _data["isView"];
         }
     }
 
@@ -2904,6 +2906,7 @@ export class CreateMovieDto implements ICreateMovieDto {
             for (let item of this.gendersName)
                 data["gendersName"].push(item);
         }
+        data["isView"] = this.isView;
         return data; 
     }
 
@@ -2922,6 +2925,7 @@ export interface ICreateMovieDto {
     director: string;
     genderId: number;
     gendersName: string[] | undefined;
+    isView: boolean;
 }
 
 export class MovieDto implements IMovieDto {
@@ -2930,6 +2934,7 @@ export class MovieDto implements IMovieDto {
     year: number;
     director: string | undefined;
     genderId: number;
+    gendersName: string[] | undefined;
     id: number;
 
     constructor(data?: IMovieDto) {
@@ -2948,6 +2953,11 @@ export class MovieDto implements IMovieDto {
             this.year = _data["year"];
             this.director = _data["director"];
             this.genderId = _data["genderId"];
+            if (Array.isArray(_data["gendersName"])) {
+                this.gendersName = [] as any;
+                for (let item of _data["gendersName"])
+                    this.gendersName.push(item);
+            }
             this.id = _data["id"];
         }
     }
@@ -2966,6 +2976,11 @@ export class MovieDto implements IMovieDto {
         data["year"] = this.year;
         data["director"] = this.director;
         data["genderId"] = this.genderId;
+        if (Array.isArray(this.gendersName)) {
+            data["gendersName"] = [];
+            for (let item of this.gendersName)
+                data["gendersName"].push(item);
+        }
         data["id"] = this.id;
         return data; 
     }
@@ -2984,6 +2999,7 @@ export interface IMovieDto {
     year: number;
     director: string | undefined;
     genderId: number;
+    gendersName: string[] | undefined;
     id: number;
 }
 

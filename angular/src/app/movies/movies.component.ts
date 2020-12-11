@@ -7,9 +7,9 @@ import {
   PagedRequestDto
 } from 'shared/paged-listing-component-base';
 import {
+  MovieServiceProxy,
   MovieDto,
-  MovieDtoPagedResultDto,
-  MovieServiceProxy
+  MovieDtoPagedResultDto
 } from '@shared/service-proxies/service-proxies';
 import { CreateMovieDialogComponent } from './create-movie/create-movie-dialog.component';
 import { EditMovieDialogComponent } from './edit-movie/edit-movie-dialog.component';
