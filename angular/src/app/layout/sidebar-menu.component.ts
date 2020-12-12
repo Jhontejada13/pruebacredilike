@@ -62,6 +62,11 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
         'fas fa-film',      
       ),
       new MenuItem(
+        this.l('Movies_Seen'),
+        '/app/movies-seen',
+        'fas fa-eye'
+      ),
+      new MenuItem(
         this.l('Roles'),
         '/app/roles',
         'fas fa-theater-masks',
