@@ -9,10 +9,12 @@ import {
 import {
   MovieServiceProxy,
   MovieDto,
-  MovieDtoPagedResultDto
+  MovieDtoPagedResultDto,
+  UserDto
 } from '@shared/service-proxies/service-proxies';
 import { CreateMovieDialogComponent } from './create-movie/create-movie-dialog.component';
 import { EditMovieDialogComponent } from './edit-movie/edit-movie-dialog.component';
+import { CreateMovieSeenDialogComponent } from '@app/movies-seen/create-movieSeen/create-movieSeen-dialog.component';
 
 class PagedMoviesRequestDto extends PagedRequestDto {
   keyword: string;
@@ -26,7 +28,7 @@ class PagedMoviesRequestDto extends PagedRequestDto {
   animations: [appModuleAnimation()]
 })
 export class MoviesComponent extends PagedListingComponentBase<MovieDto>{
-  movies: MovieDto[] = [];
+  movies: MovieDto[] = [];  
   keyword = '';
   advancedFiltersVisible = false;
 
@@ -38,21 +40,21 @@ export class MoviesComponent extends PagedListingComponentBase<MovieDto>{
     super(injector);
   }
 
-  // ngOnInit(): void {
-  // }
-
   createMovie(): void {
-    console.log("Estoy funcionando")
     this.showCreateOrEditMovieDialog()
   }
 
   editMovie(movie: MovieDto): void {
-    console.log("También funciono", movie.title)
     this.showCreateOrEditMovieDialog(movie.id)
   }
 
   seeTrailer(movie: MovieDto): void {
     console.log("También funciona esta vuelta!", movie.title)
+  }
+  
+  setAsView(movie: MovieDto){
+    console.log("Desde acá debo llamar al elemento movie seen.html")
+    this.showSetAsViewMovieDialog(movie.id);
   }
 
   clearFilters(): void {
@@ -125,4 +127,24 @@ export class MoviesComponent extends PagedListingComponentBase<MovieDto>{
     })
   }
 
+  private showSetAsViewMovieDialog(id?: number){
+    let setAsViewMovie: BsModalRef;
+    if (!id) {
+      console.log("La película no existe");
+      this._modalService.show(alert)
+    }else{
+      setAsViewMovie = this._modalService.show(
+        CreateMovieSeenDialogComponent,
+        {
+          class: 'modal-lg',
+          initialState: {
+            movieId: id,
+          }
+        }
+      );
+    }
+    setAsViewMovie.content.onSave.subscribe(() => {
+      this.refresh();
+    })
+  }
 }
