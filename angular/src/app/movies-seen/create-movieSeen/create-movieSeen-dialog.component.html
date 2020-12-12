@@ -1,0 +1,32 @@
+<form class="form-horizontal" autocomplete="off" #createMovieSeenModal="ngForm" (ngSubmit)="save()">
+    <abp-modal-header [title]="'Set as view ' | localize" (onCloseClick)="bsModalRef.hide()">
+    </abp-modal-header>
+    <div class="modal-body">
+        <tabset>
+            <tab [heading]="'MovieSeenDetails' | localize" class="pt-3 px-2">
+
+                <div class="form-group row required">
+                    <label for="viewDate" class="col-md-3 col-form-label">
+                        {{ "View Date" | localize}}
+                    </label>
+                    <div class="col-md-9">
+                        <input type="date" placeholder="View Date" class="form-control" bsDatePicker
+                        [(ngModel)]="movieSeen.viewDate" name="viewDate">
+                    </div>
+                </div>
+                <div class="form-group row required">
+                    <label for="score" class="col-md-3 col-form-label">
+                        {{ "Score" | localize }}
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="score" id="score" required
+                            [(ngModel)]="movieSeen.score" #titleModel="ngModel" #titleEl>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+    <abp-modal-footer [cancelDisabled]="saving" [saveDisabled]="!createMovieSeenModal.form.valid || saving"
+        (onCancelClick)="bsModalRef.hide()">
+    </abp-modal-footer>
+</form>
