@@ -8,6 +8,7 @@ import { UsersComponent } from './users/users.component';
 import { TenantsComponent } from './tenants/tenants.component';
 import { RolesComponent } from 'app/roles/roles.component';
 import { MoviesComponent } from 'app/movies/movies.component';
+import { MoviesSeenComponent } from 'app/movies-seen/movies-seen.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ChangePasswordComponent } from './users/change-password/change-password
                     { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },
                     { path: 'about', component: AboutComponent },
                     { path: 'update-password', component: ChangePasswordComponent },
-                    { path: 'movies', component: MoviesComponent}
+                    { path: 'movies', component: MoviesComponent},
+                    { path: 'movies-seen', component: MoviesSeenComponent}
                 ]
             }
         ])
