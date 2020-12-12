@@ -1023,6 +1023,118 @@ export class MovieSeenServiceProxy {
     }
 
     /**
+     * @param idMovieSeen (optional) 
+     * @param idMovie (optional) 
+     * @return Success
+     */
+    getInfoMovieSeen(idMovieSeen: number | undefined, idMovie: number | undefined): Observable<Movie_SeenDto> {
+        let url_ = this.baseUrl + "/api/services/app/MovieSeen/GetInfoMovieSeen?";
+        if (idMovieSeen === null)
+            throw new Error("The parameter 'idMovieSeen' cannot be null.");
+        else if (idMovieSeen !== undefined)
+            url_ += "IdMovieSeen=" + encodeURIComponent("" + idMovieSeen) + "&";
+        if (idMovie === null)
+            throw new Error("The parameter 'idMovie' cannot be null.");
+        else if (idMovie !== undefined)
+            url_ += "idMovie=" + encodeURIComponent("" + idMovie) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetInfoMovieSeen(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetInfoMovieSeen(<any>response_);
+                } catch (e) {
+                    return <Observable<Movie_SeenDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<Movie_SeenDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetInfoMovieSeen(response: HttpResponseBase): Observable<Movie_SeenDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Movie_SeenDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Movie_SeenDto>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    getAllMovies(): Observable<Movie_SeenDtoListResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/MovieSeen/GetAllMovies";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllMovies(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllMovies(<any>response_);
+                } catch (e) {
+                    return <Observable<Movie_SeenDtoListResultDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<Movie_SeenDtoListResultDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAllMovies(response: HttpResponseBase): Observable<Movie_SeenDtoListResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Movie_SeenDtoListResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Movie_SeenDtoListResultDto>(<any>null);
+    }
+
+    /**
      * @param id (optional) 
      * @return Success
      */
@@ -3470,6 +3582,11 @@ export class Movie_SeenDto implements IMovie_SeenDto {
     score: number;
     movieId: number;
     userId: number;
+    movieYear: number;
+    titleMovie: string | undefined;
+    synopsisMovie: string | undefined;
+    directorMovie: string | undefined;
+    genderMovie: string | undefined;
     id: number;
 
     constructor(data?: IMovie_SeenDto) {
@@ -3488,6 +3605,11 @@ export class Movie_SeenDto implements IMovie_SeenDto {
             this.score = _data["score"];
             this.movieId = _data["movieId"];
             this.userId = _data["userId"];
+            this.movieYear = _data["movieYear"];
+            this.titleMovie = _data["titleMovie"];
+            this.synopsisMovie = _data["synopsisMovie"];
+            this.directorMovie = _data["directorMovie"];
+            this.genderMovie = _data["genderMovie"];
             this.id = _data["id"];
         }
     }
@@ -3506,6 +3628,11 @@ export class Movie_SeenDto implements IMovie_SeenDto {
         data["score"] = this.score;
         data["movieId"] = this.movieId;
         data["userId"] = this.userId;
+        data["movieYear"] = this.movieYear;
+        data["titleMovie"] = this.titleMovie;
+        data["synopsisMovie"] = this.synopsisMovie;
+        data["directorMovie"] = this.directorMovie;
+        data["genderMovie"] = this.genderMovie;
         data["id"] = this.id;
         return data; 
     }
@@ -3524,7 +3651,63 @@ export interface IMovie_SeenDto {
     score: number;
     movieId: number;
     userId: number;
+    movieYear: number;
+    titleMovie: string | undefined;
+    synopsisMovie: string | undefined;
+    directorMovie: string | undefined;
+    genderMovie: string | undefined;
     id: number;
+}
+
+export class Movie_SeenDtoListResultDto implements IMovie_SeenDtoListResultDto {
+    items: Movie_SeenDto[] | undefined;
+
+    constructor(data?: IMovie_SeenDtoListResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(Movie_SeenDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): Movie_SeenDtoListResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new Movie_SeenDtoListResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): Movie_SeenDtoListResultDto {
+        const json = this.toJSON();
+        let result = new Movie_SeenDtoListResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IMovie_SeenDtoListResultDto {
+    items: Movie_SeenDto[] | undefined;
 }
 
 export class Movie_SeenDtoPagedResultDto implements IMovie_SeenDtoPagedResultDto {
