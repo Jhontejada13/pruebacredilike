@@ -12,6 +12,7 @@ import {
   CreateMovie_SeenDto,
   Movie_SeenDtoPagedResultDto
 } from '@shared/service-proxies/service-proxies'
+import { CreateMovieSeenDialogComponent } from './create-movieSeen/create-movieSeen-dialog.component';
 
 class PagedMovieSeenRequestDto extends PagedRequestDto {
   keyword: string;
@@ -32,13 +33,14 @@ export class MoviesSeenComponent extends PagedListingComponentBase<Movie_SeenDto
   constructor(
     injector: Injector,
     private _movieSeenService: MovieSeenServiceProxy,
-    private _modalService: BsModalRef,
+    private _modalService: BsModalService,
   ) { 
     super(injector);
   }
 
-  // ngOnInit(): void {
-  // }
+  editMovieSeen(){
+    console.log("También funciono, btnEditar")
+  }
 
   clearFilters(): void {
     this.keyword = '';
@@ -78,6 +80,23 @@ export class MoviesSeenComponent extends PagedListingComponentBase<Movie_SeenDto
         }
       }
     );
+  }
+
+  private showCreateOrEditMovieSeenDialog(id?: number){
+    let createOrEditMovieSeeDialog: BsModalRef;
+    if (!id) {
+      console.log("NO se ha mandalo la película");
+    }else{
+      createOrEditMovieSeeDialog = this._modalService.show(
+        CreateMovieSeenDialogComponent,
+        {
+          class: 'modal-lg'
+        }
+      );
+    }
+    createOrEditMovieSeeDialog.content.onSave.subscribe(() => {
+      this.refresh();
+    })
   }
 
 }

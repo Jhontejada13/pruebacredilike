@@ -1,1 +1,96 @@
-<p>movies-seen works!</p>
+<div [@routerTransition]>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <h1> {{ "Movies Seen" | localize }} </h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content px-2">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn bg-blue" (click)="getDataPage(1)">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <input type="text" class="form-control" name="keyword"
+                            [placeholder]="'SearchWithThreeDot' | localize" [(ngModel)]="keyword"
+                            (keyup.enter)="getDataPage(1)" />
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap" [busy]="isTableLoading">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th>{{"Title" | localize}}</th>
+                                        <th>{{"Gender" | localize}}</th>
+                                        <th>{{"Score" | localize}}</th>
+                                        <th>{{"View Date" | localize}}</th>
+                                        <th style="width: 310px;">{{ "Actions" | localize }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let movieSeen of movies_seen | paginate
+                                        : {
+                                           id: 'server',
+                                           itemsPerPage: pageSize,
+                                           currentPage: pageNumber,
+                                           totalItems: totalItems  
+                                        }">
+                                        <td>
+                                            {{ movieSeen.titleMovie }}
+                                        </td>
+                                        <td>
+                                            {{ movieSeen.genderMovie }}
+                                        </td>
+                                        <td>
+                                            {{ movieSeen.score }}
+                                        </td>
+                                        <td>
+                                            {{ movieSeen.viewDate | date: 'dd/MM/yyyy' }}
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm bg-secondary"
+                                                (click)="editMovieSeen(movie)">
+                                                <i class="fas fa-pencil-alt"></i>
+                                                {{ "Edit" | localize }}
+                                            </button>
+                                            <button type="button" class="btn btn-sm bg-danger mx-2"
+                                                (click)="delete(movie)">
+                                                <i class="fas fa-trash"></i>
+                                                {{ "Delete" | localize }}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="card-footer bg-light border-top">
+                                <div class="row">
+                                    <div class="col-sm-4 col-12 text-sm-left text-center">
+                                        <button class="btn btn-secondary" (click)="refresh()">
+                                            <i class="fas fa-redo-alt"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-4 col-12 text-center">
+                                        <p class="mb-0 my-2">
+                                            {{ "TotalRecordsCount" | localize: totalItems }}
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-4 col-12">
+                                        <div class="float-sm-right m-auto">
+                                            <abp-pagination-controls id="server" (pageChange)="getDataPage($event)">
+                                            </abp-pagination-controls>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
