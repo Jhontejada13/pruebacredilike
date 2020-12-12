@@ -74,30 +74,7 @@ namespace PeliFlix.Movies_Seen
         {
             var movieSeen = await _MovieSeenRepository.GetAsync(input.Id);
             await _MovieSeenRepository.DeleteAsync(movieSeen);   
-        }
-
-        //public async Task<ListResultDto<GetAllMovieInfoDto>> GetInfoMovie(int idMovie_Seen, int idMovie)
-        //{
-        //    var movieInfoDto = new GetAllMovieInfoDto();
-
-        //    var getInfoMovie = await _MovieRepository.FirstOrDefaultAsync(m => m.Id == idMovie);
-        //    var getInfoMovieSeen = await _MovieSeenRepository.FirstOrDefaultAsync(ms => ms.Id == idMovie_Seen);
-
-        //    if (getAllInfoMovie == null || getInfoMovieSeen == null)
-        //    {
-        //        throw new UserFriendlyException("Sorry, this movie dosen´t found");
-        //    }
-
-        //    movieInfoDto.TitleMovie = getInfoMovie.Title;
-        //    movieInfoDto.SynopsisMovie = getInfoMovie.Synopsis;
-        //    movieInfoDto.DirectorMovie = getInfoMovie.Director;
-        //    movieInfoDto.MovieYear = getInfoMovie.year;
-
-        //    movieInfoDto.ViewDate = getInfoMovieSeen.View_Date;
-        //    movieInfoDto.Score = getInfoMovieSeen.Score;
-
-        //    return new ListResultDto<GetAllMovieInfoDto>(ObjectMapper.Map<List<GetAllMovieInfoDto>>(movieInfoDto));
-        //}
+        }        
 
         public async Task<Movie_SeenDto> GetInfoMovieSeen(int IdMovieSeen, int idMovie)
         {
@@ -124,11 +101,9 @@ namespace PeliFlix.Movies_Seen
             return movieInfoDto;
         }
 
-
-
         public async Task<ListResultDto<Movie_SeenDto>> GetAllMoviesAsync()
         {
-
+            
             var completMovieInfo = from ms in await _MovieSeenRepository.GetAllListAsync()
                                    join m in await _MovieRepository.GetAllListAsync()
                                    on ms.MovieId equals m.Id

@@ -32,6 +32,9 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
 import { MoviesComponent } from '@app/movies/movies.component';
 import { CreateMovieDialogComponent } from '@app/movies/create-movie/create-movie-dialog.component';
 import { EditMovieDialogComponent } from '@app/movies/edit-movie/edit-movie-dialog.component';
+//Movies_Seen
+import { MoviesSeenComponent } from './movies-seen/movies-seen.component';
+import { CreateMovieSeenDialogComponent } from '@app/movies-seen/create-movieSeen/create-movieSeen-dialog.component'
 // layout
 import { HeaderComponent } from './layout/header.component';
 import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component';
@@ -42,6 +45,7 @@ import { SidebarComponent } from './layout/sidebar.component';
 import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
+
 
 
 @NgModule({
@@ -77,7 +81,9 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     SidebarLogoComponent,
     SidebarUserPanelComponent,
     SidebarMenuComponent,
-    
+    //movies_seen
+    MoviesSeenComponent,    
+    CreateMovieSeenDialogComponent
   ],
   imports: [
     CommonModule,
@@ -108,7 +114,9 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     ResetPasswordDialogComponent,
     // movies
     CreateMovieDialogComponent,
-    EditMovieDialogComponent
+    EditMovieDialogComponent,
+    //movies_seen
+    CreateMovieSeenDialogComponent,
   ],
 })
 export class AppModule {}
