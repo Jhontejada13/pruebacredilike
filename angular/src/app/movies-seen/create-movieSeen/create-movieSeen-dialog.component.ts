@@ -51,13 +51,9 @@ export class CreateMovieSeenDialogComponent extends AppComponentBase implements 
 
         this.movieSeen.userId = this._sesionService.userId
         this.movieSeen.view = true;
-        this.movieSeen.movieId = this.movieId;
+        this.movieSeen.movieId = this.movieId;        
 
-        
-
-        var date = Date.parse(stringify(this.movieSeen.viewDate));
-        var viewDate = new Date(date);
-        this.movieSeen.viewDate = moment().toDate() /* Este error no interfiere en la creación,
+        this.movieSeen.viewDate = moment(this.movieSeen.viewDate).toDate() /* Este error no interfiere en la creación,
         es más bien una advertencia de pérdida de propiedades del objeto Date frente al objeto 
         Moment, la película se establece como vista sin problemas */
 
