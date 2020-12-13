@@ -13,6 +13,7 @@ import {
   Movie_SeenDtoPagedResultDto
 } from '@shared/service-proxies/service-proxies'
 import { CreateMovieSeenDialogComponent } from './create-movieSeen/create-movieSeen-dialog.component';
+import { EditMovieSeenDialogComponent } from './edit.movieSeen/edit-movieSee-dialog.component';
 
 class PagedMovieSeenRequestDto extends PagedRequestDto {
   keyword: string;
@@ -38,8 +39,9 @@ export class MoviesSeenComponent extends PagedListingComponentBase<Movie_SeenDto
     super(injector);
   }
 
-  editMovieSeen(){
+  editMovieSeen(movie: Movie_SeenDto){
     console.log("También funciono, btnEditar")
+    this.showCreateOrEditMovieSeenDialog(movie.id);
   }
 
   clearFilters(): void {
@@ -82,17 +84,20 @@ export class MoviesSeenComponent extends PagedListingComponentBase<Movie_SeenDto
     );
   }
 
-  private showCreateOrEditMovieSeenDialog(id?: number){
+  private showCreateOrEditMovieSeenDialog(id?: number): void{
     let createOrEditMovieSeeDialog: BsModalRef;
     if (!id) {
-      console.log("NO se ha mandalo la película");
+      console.log("No se ha enviado la película");
     }else{
       createOrEditMovieSeeDialog = this._modalService.show(
-        CreateMovieSeenDialogComponent,
+        EditMovieSeenDialogComponent,
         {
-          class: 'modal-lg'
+          class: 'modal-lg',
+          initialState: {
+            movieSeenId: id,
+          }
         }
-      );
+      )
     }
     createOrEditMovieSeeDialog.content.onSave.subscribe(() => {
       this.refresh();
