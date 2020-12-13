@@ -36,6 +36,7 @@ import { EditMovieDialogComponent } from '@app/movies/edit-movie/edit-movie-dial
 //Movies_Seen
 import { MoviesSeenComponent } from './movies-seen/movies-seen.component';
 import { CreateMovieSeenDialogComponent } from '@app/movies-seen/create-movieSeen/create-movieSeen-dialog.component'
+import { EditMovieSeenDialogComponent } from "@app/movies-seen/edit.movieSeen/edit-movieSee-dialog.component";
 // layout
 import { HeaderComponent } from './layout/header.component';
 import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component';
@@ -84,7 +85,8 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     SidebarMenuComponent,
     //movies_seen
     MoviesSeenComponent,    
-    CreateMovieSeenDialogComponent
+    CreateMovieSeenDialogComponent,
+    EditMovieSeenDialogComponent
   ],
   imports: [
     CommonModule,
@@ -119,6 +121,7 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     EditMovieDialogComponent,
     //movies_seen
     CreateMovieSeenDialogComponent,
+    EditMovieSeenDialogComponent
   ],
 })
 export class AppModule {}
