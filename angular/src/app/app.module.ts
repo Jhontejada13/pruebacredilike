@@ -37,6 +37,10 @@ import { EditMovieDialogComponent } from '@app/movies/edit-movie/edit-movie-dial
 import { MoviesSeenComponent } from './movies-seen/movies-seen.component';
 import { CreateMovieSeenDialogComponent } from '@app/movies-seen/create-movieSeen/create-movieSeen-dialog.component'
 import { EditMovieSeenDialogComponent } from "@app/movies-seen/edit.movieSeen/edit-movieSee-dialog.component";
+//Genders
+import { GendersComponent } from './genders/genders.component';
+import { CreateGenderDialogComponent } from "@app/genders/create-gender/create-gender-dialog.component";
+import { EditGenderDialogComponent } from "@app/genders/edit-gender/edit-gender-dialog.component";
 // layout
 import { HeaderComponent } from './layout/header.component';
 import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component';
@@ -47,6 +51,7 @@ import { SidebarComponent } from './layout/sidebar.component';
 import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
+
 
 
 
@@ -86,7 +91,11 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     //movies_seen
     MoviesSeenComponent,    
     CreateMovieSeenDialogComponent,
-    EditMovieSeenDialogComponent
+    EditMovieSeenDialogComponent,
+    //genders
+    GendersComponent,
+    CreateGenderDialogComponent,
+    EditGenderDialogComponent
   ],
   imports: [
     CommonModule,
@@ -121,7 +130,10 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     EditMovieDialogComponent,
     //movies_seen
     CreateMovieSeenDialogComponent,
-    EditMovieSeenDialogComponent
+    EditMovieSeenDialogComponent,
+    //genders
+    CreateGenderDialogComponent,
+    EditGenderDialogComponent
   ],
 })
 export class AppModule {}
