@@ -14,8 +14,8 @@ import {
     MovieSeenServiceProxy,
     Movie_SeenDto,
 } from '@shared/service-proxies/service-proxies';
-import { AbpSessionService } from 'abp-ng2-module';
 import * as moment from 'moment';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
     templateUrl: './edit-movieSeen-dialog.component.html',
@@ -46,6 +46,7 @@ export class EditMovieSeenDialogComponent extends AppComponentBase implements On
         this.saving = true;
 
         this.movieSeen.viewDate = moment(this.movieSeen.viewDate).toDate()
+
         this._movieSeenService
             .update(this.movieSeen)
             .pipe(

@@ -92,7 +92,6 @@ export class CreateMovieDialogComponent extends AppComponentBase
         this.bsModalRef.hide();
         this.onSave.emit();
       });
-      console.log(this.movie);
   }
 }
 

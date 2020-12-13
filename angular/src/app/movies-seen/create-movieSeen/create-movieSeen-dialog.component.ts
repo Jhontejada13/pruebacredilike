@@ -53,7 +53,10 @@ export class CreateMovieSeenDialogComponent extends AppComponentBase implements 
         this.movieSeen.view = true;
         this.movieSeen.movieId = this.movieId;        
 
-        this.movieSeen.viewDate = moment(this.movieSeen.viewDate).toDate() /* Este error no interfiere en la creación,
+        this.movieSeen.viewDate = moment(this.movieSeen.viewDate).toDate()
+        //let date = moment(this.movieSeen.viewDate).toDate();
+        //this.movieSeen.viewDate = date;
+        /* Este error no interfiere en la creación,
         es más bien una advertencia de pérdida de propiedades del objeto Date frente al objeto 
         Moment, la película se establece como vista sin problemas */
 
