@@ -10,6 +10,7 @@ import { RolesComponent } from 'app/roles/roles.component';
 import { MoviesComponent } from 'app/movies/movies.component';
 import { MoviesSeenComponent } from 'app/movies-seen/movies-seen.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
+import { GendersComponent } from './genders/genders.component';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import { ChangePasswordComponent } from './users/change-password/change-password
                     { path: 'about', component: AboutComponent },
                     { path: 'update-password', component: ChangePasswordComponent },
                     { path: 'movies', component: MoviesComponent},
-                    { path: 'movies-seen', component: MoviesSeenComponent}
+                    { path: 'movies-seen', component: MoviesSeenComponent},
+                    { path: 'genders', component: GendersComponent }
                 ]
             }
         ])
