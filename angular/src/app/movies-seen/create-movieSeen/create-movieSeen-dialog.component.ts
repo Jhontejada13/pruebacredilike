@@ -16,6 +16,8 @@ import {
     MovieDto,
 } from '@shared/service-proxies/service-proxies';
 import { AbpSessionService} from 'abp-ng2-module';
+import { stringify } from '@angular/compiler/src/util';
+import * as moment from 'moment';
 
 @Component({
     templateUrl: './create-movieSeen-dialog.component.html',
@@ -51,10 +53,15 @@ export class CreateMovieSeenDialogComponent extends AppComponentBase implements 
         this.movieSeen.view = true;
         this.movieSeen.movieId = this.movieId;
 
-        console.log(this.movieSeen.viewDate);
-        console.log(typeof(this.movieSeen.viewDate));
+        
 
-         /*this._movieSeenService
+        var date = Date.parse(stringify(this.movieSeen.viewDate));
+        var viewDate = new Date(date);
+        this.movieSeen.viewDate = moment().toDate() /* Este error no interfiere en la creación,
+        es más bien una advertencia de pérdida de propiedades del objeto Date frente al objeto 
+        Moment, la película se establece como vista sin problemas */
+
+         this._movieSeenService
              .create(this.movieSeen)
              .pipe(
                  finalize(() => {
@@ -65,6 +72,6 @@ export class CreateMovieSeenDialogComponent extends AppComponentBase implements 
                  this.notify.info(this.l('SavedSuccessfully'));
                  this.bsModalRef.hide();
                  this.onSave.emit();
-             });*/
+             });
     }
 }
