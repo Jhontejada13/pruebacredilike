@@ -10,7 +10,6 @@ import {
   MovieServiceProxy,
   MovieDto,
   MovieDtoPagedResultDto,
-  UserDto
 } from '@shared/service-proxies/service-proxies';
 import { CreateMovieDialogComponent } from './create-movie/create-movie-dialog.component';
 import { EditMovieDialogComponent } from './edit-movie/edit-movie-dialog.component';
@@ -48,12 +47,11 @@ export class MoviesComponent extends PagedListingComponentBase<MovieDto>{
     this.showCreateOrEditMovieDialog(movie.id)
   }
 
-  seeTrailer(movie: MovieDto): void {
-    console.log("También funciona esta vuelta!", movie.title)
-  }
+  // seeTrailer(movie: MovieDto): void {
+  //   console.log("También funciona esta vuelta!", movie.title)
+  // }
   
   setAsView(movie: MovieDto){
-    console.log("Desde acá debo llamar al elemento movie seen.html")
     this.showSetAsViewMovieDialog(movie.id);
   }
 
